@@ -1,0 +1,4 @@
+#!/bin/bash
+/usr/sbin/i2cset -y 1 0x3c 31 1 && for letter in `date +"%H:%M" | sed -e 's/\(.\)/\1 /g'`;
+do /usr/sbin/i2cset -y 1 0x3c 32 `printf '%d' "'$letter"`;
+done

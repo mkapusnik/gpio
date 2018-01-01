@@ -1,0 +1,2 @@
+#!/bin/bash
+i2cset -y 1 0x3c 31 1 && for letter in $@; do i2cset -y 1 0x3c 32 `printf '%d' "'$letter"`; done

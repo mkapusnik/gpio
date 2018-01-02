@@ -5,7 +5,7 @@ import sys
 from time import sleep
 from daemonize import Daemonize
 
-ledPin = 17
+ledPin = 14
 pid = "/tmp/trezard.pid"
 
 def main():
@@ -17,9 +17,8 @@ def main():
     while True:
       sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       GPIO.output(ledPin, sock.connect_ex(('127.0.0.1', 17298)) == 0)
-      sleep(5)
+      sleep(1)
   finally:
-    print "asdas"
     GPIO.cleanup()
 
 

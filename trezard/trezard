@@ -1,0 +1,19 @@
+#!/bin/sh
+
+case "$1" in
+  start)
+     ./trezard.py start
+   ;;
+  stop)
+   ;;
+  force-reload|restart)
+   ;;
+  status)
+   ;;
+ *)
+   echo "Usage: /etc/init.d/trezard {start|stop|restart|force-reload|status}"
+   exit 1
+  ;;
+esac
+
+exit 0

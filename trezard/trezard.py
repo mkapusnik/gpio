@@ -5,7 +5,7 @@ import sys
 from time import sleep
 from daemonize import Daemonize
 
-ledPin = 14
+ledPin = 21
 pid = "/tmp/trezard.pid"
 
 def main():

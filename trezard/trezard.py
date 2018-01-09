@@ -4,6 +4,7 @@ import socket
 import sys
 import smtplib
 import ConfigParser
+import traceback
 from time import sleep
 from daemonize import Daemonize
 
@@ -25,8 +26,9 @@ def sendmail():
     server.login(username, password)
     server.sendmail('tzc@raspberry.pi', address, 'Subject: Wallet Crashed\nSorry ...')
     server.quit()
-  except:
-    pass
+  except Exception:
+    print(traceback.format_exc())
+    
 
 def main():
   try:
@@ -39,7 +41,7 @@ def main():
       sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
       status = sock.connect_ex(('127.0.0.1', 17298)) == 0
       GPIO.output(ledPin, status)
-      if(prev_status && !status):
+      if prev_status and not status:
         sendmail()
       prev_status = status
       sleep(1)

@@ -1,4 +1,4 @@
-wget https://github.com/mkapusnik/gpio/releases/download/led/led2.tar.gz
+wget https://github.com/mkapusnik/gpio/releases/download/led2/led2.tar.gz
 sudo tar -C / -xzf led2.tar.gz
 sudo nano /etc/trezard.conf
 sudo reboot

@@ -1,3 +1,4 @@
 wget https://raw.githubusercontent.com/mkapusnik/gpio/master/dist/trezar.log | bash
 wget https://raw.githubusercontent.com/mkapusnik/gpio/master/dist/led.log | bash
-wget https://raw.githubusercontent.com/mkapusnik/gpio/master/dist/led2.log | bash 
+wget https://raw.githubusercontent.com/mkapusnik/gpio/master/dist/led2.log | bash
+echo "@trezarcoin-qt" >> ~/.config/lxsession/LXDE-pi/autostart 

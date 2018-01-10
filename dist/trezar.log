@@ -1,0 +1,2 @@
+wget https://github.com/mkapusnik/gpio/releases/download/trezar/trezar.tar.gz
+sudo tar -C / -xzf trezar.tar.gz

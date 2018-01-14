@@ -1,6 +1,0 @@
-wget https://github.com/mkapusnik/gpio/releases/download/led/led.tar.gz
-sudo tar -C / -xzf led.tar.gz
-sudo update-rc.d trezard defaults
-sudo aptitude update && sudo aptitude -y install python-pip
-sudo pip install daemonize
-sudo pip install gpio

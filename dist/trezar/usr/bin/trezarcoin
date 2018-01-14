@@ -1,3 +1,0 @@
-#!/bin/bash
-dir=$(find /media/pi -mindepth 1 -maxdepth 1 -type d)
-trezarcoin-qt -datadir=$dir -conf=$dir/trezarcoin.conf

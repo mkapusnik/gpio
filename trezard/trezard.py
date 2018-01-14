@@ -8,7 +8,7 @@ import traceback
 from time import sleep
 from daemonize import Daemonize
 
-ledPin = 21
+ledPin = 4
 pid = "/tmp/trezard.pid"
 
 configParser = ConfigParser.ConfigParser()
@@ -18,17 +18,16 @@ username = configParser.get('mail', 'username')
 password = configParser.get('mail', 'password')
 address = configParser.get('mail', 'address')
 
-def sendmail():
+def sendmail(subject):
   try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
     server.ehlo()
     server.login(username, password)
-    server.sendmail('tzc@raspberry.pi', address, 'Subject: Wallet Crashed\nSorry ...')
+    server.sendmail('tzc@raspberry.pi', address, 'Subject: '+subject)
     server.quit()
   except Exception:
     print(traceback.format_exc())
-    
 
 def main():
   try:
@@ -42,7 +41,9 @@ def main():
       status = sock.connect_ex(('127.0.0.1', 17298)) == 0
       GPIO.output(ledPin, status)
       if prev_status and not status:
-        sendmail()
+        sendmail('Wallet Crashed\nSorry ...')
+      if not prev_status and status:
+        sendmail('Wallet Running\nAgain ...')
       prev_status = status
       sleep(1)
   finally:

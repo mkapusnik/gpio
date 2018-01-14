@@ -1,7 +1,7 @@
 #!/bin/bash
 echo " ##### Installing dependencies ##### "
 sudo aptitude update
-sudo aptitude -y install python-pip libminiupnpc-dev libqt4-dev xvfb
+sudo aptitude -y install python-pip libminiupnpc-dev libqt4-dev Xvfb x11vnc expect 
 sudo pip install daemonize gpio
 
 echo " ##### Downloading TrezarPi ##### "
@@ -19,5 +19,5 @@ sudo update-rc.d trezard defaults
 echo " ##### Setting up autostart ##### "
 grep -q -F 'trezarcoin' ~/.config/lxsession/LXDE-pi/autostart || echo "@trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
 
-sudo nano /etc/trezard.conf
+#sudo nano /etc/trezarpi.conf
 sudo reboot

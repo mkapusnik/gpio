@@ -1,5 +1,17 @@
 #!/bin/sh
 
+### BEGIN INIT INFO
+# Provides:          trezard
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Trezar Wallet daemon
+# Description:       This daemon monitors the state of the TZC wallet
+### END INIT INFO
+
+# Author: Michal Kapusnik <michal.kapusnik@gmail.com>
+
 case "$1" in
   start)
      /usr/bin/trezard.py start

@@ -1,0 +1,14 @@
+#!/usr/bin/expect
+target=$1
+password=$2
+
+dir=$(find /media/pi -mindepth 1 -maxdepth 1 -type d)
+spawn rsync -av -e ssh $dir $target
+expect "password:"
+send "${password}\n"
+expect eof
+if [catch wait] {
+    puts "rsync failed"
+    exit 1
+}
+exit 0

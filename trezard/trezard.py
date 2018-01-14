@@ -8,7 +8,7 @@ import traceback
 from time import sleep
 from daemonize import Daemonize
 
-ledPin = 21
+ledPin = 4
 pid = "/tmp/trezard.pid"
 
 configParser = ConfigParser.ConfigParser()

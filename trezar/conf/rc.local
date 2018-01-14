@@ -1,0 +1,7 @@
+Xvfb :99 -screen 0 1024x768x32 &
+DISPLAY=:99 x11vnc -bg -nopw
+#DISPLAY=:99 su - pi trezarcoin
+
+TpWqJXjwpS4wE1TChewNSHJ71wjXWi4dJj
+
+exit 0

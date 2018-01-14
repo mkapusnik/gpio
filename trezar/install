@@ -6,7 +6,7 @@ sudo pip install daemonize gpio
 sudo rm -rf /usr/share/trezarpi/
 wget https://github.com/mkapusnik/gpio/releases/download/tzc/trezarpi.tar.gz
 sudo tar -C / -xzf trezarpi.tar.gz
-sudo ln -s /usr/share/trezarpi/trezard /etc/init.d/trezard
+sudo ln -sf /usr/share/trezarpi/trezard /etc/init.d/trezard
 sudo update-rc.d trezard defaults
 
 #autostart

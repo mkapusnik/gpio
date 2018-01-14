@@ -1,3 +1,4 @@
 #!/bin/bash
+while [ $(find /media/pi -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 0 ]; do sleep 2; done
 dir=$(find /media/pi -mindepth 1 -maxdepth 1 -type d)
 trezarcoin-qt -datadir=$dir -conf=$dir/trezarcoin.conf

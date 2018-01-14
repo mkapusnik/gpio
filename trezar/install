@@ -1,15 +1,22 @@
 #!/bin/bash
+echo " ##### Installing dependencies ##### "
 sudo aptitude update
 sudo aptitude -y install python-pip libminiupnpc-dev libqt4-dev xvfb
 sudo pip install daemonize gpio
 
+echo " ##### Downloading TrezarPi ##### "
 sudo rm -rf /usr/share/trezarpi/
+sudo rm -rf trezarpi.tar.gz
 wget https://github.com/mkapusnik/gpio/releases/download/tzc/trezarpi.tar.gz
+
+echo " ##### Extracting TrezarPi ##### "
 sudo tar -C / -xzf trezarpi.tar.gz
+
+echo " ##### Installing services into the OS ##### "
 sudo ln -sf /usr/share/trezarpi/trezard /etc/init.d/trezard
 sudo update-rc.d trezard defaults
 
-#autostart
+echo " ##### Setting up autostart ##### "
 grep -q -F 'trezarcoin' ~/.config/lxsession/LXDE-pi/autostart || echo "@trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
 
 sudo nano /etc/trezard.conf

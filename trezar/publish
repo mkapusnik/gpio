@@ -1,8 +1,9 @@
 #!/bin/bash
 mkdir _dist
-cp -r deps _dist
-cp -r conf _dist/etc
-cp -r src _dist/usr/share/trezarpi
+cp -R deps/. _dist
+cp -R conf/. _dist/etc
+mkdir -p _dist/usr/share/trezarpi
+cp -R src/. _dist/usr/share/trezarpi
 cd _dist
 tar -pczf ../trezarpi.tar.gz .
 cd ..

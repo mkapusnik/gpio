@@ -13,6 +13,9 @@ echo " ##### Extracting TrezarPi ##### "
 sudo tar -C / -xzf trezarpi.tar.gz
 
 echo " ##### Installing services into the OS ##### "
+chmod +x /usr/bin/trezarcoin-qt
+sudo chown root:root /etc/rc.local
+sudo chmod 755 /etc/rc.local
 sudo ln -sf /usr/share/trezarpi/trezard /etc/init.d/trezard
 sudo update-rc.d trezard defaults
 

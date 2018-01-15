@@ -24,4 +24,6 @@ sed -i '/trezarcoin/d' ~/.config/lxsession/LXDE-pi/autostart
 echo "@/usr/share/trezarpi/trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
 
 #sudo nano /etc/trezarpi.conf
+
+echo " ##### Rebooting ##### "
 sudo reboot

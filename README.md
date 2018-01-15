@@ -6,3 +6,8 @@ Instalation command:
 ```
 wget -q -O- https://raw.githubusercontent.com/mkapusnik/gpio/master/trezar/install | bash
 ```
+
+Incremental update command:
+```
+wget -q -O- https://raw.githubusercontent.com/mkapusnik/gpio/master/trezar/update | bash
+```

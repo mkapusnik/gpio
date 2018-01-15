@@ -2,7 +2,7 @@
 echo " ##### Installing dependencies ##### "
 sudo aptitude update
 sudo aptitude -o Dpkg::Progress-Fancy="1" -y install python-pip libminiupnpc-dev libqt4-dev Xvfb x11vnc expect i2c-tools
-sudo pip install daemonize gpio
+sudo pip install daemonize gpio python-bitcoinrpc
 
 echo " ##### Downloading TrezarPi ##### "
 sudo rm -rf /usr/share/trezarpi/

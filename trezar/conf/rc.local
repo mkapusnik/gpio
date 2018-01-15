@@ -1,3 +1,4 @@
+/usr/share/trezarpi/lcd Booting ...
 Xvfb :99 -screen 0 1024x768x24+32 &
 DISPLAY=:99 x11vnc -bg -nopw
 #DISPLAY=:99 su - pi trezarcoin &

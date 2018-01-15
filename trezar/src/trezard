@@ -14,7 +14,7 @@
 
 case "$1" in
   start)
-     /usr/bin/trezard.py start
+     /usr/share/trezarpi/trezard.py start
    ;;
   stop)
    ;;

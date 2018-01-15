@@ -20,7 +20,8 @@ sudo ln -sf /usr/share/trezarpi/trezard /etc/init.d/trezard
 sudo update-rc.d trezard defaults
 
 echo " ##### Setting up autostart ##### "
-grep -q -F 'trezarcoin' ~/.config/lxsession/LXDE-pi/autostart || echo "@trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
+sed -i '/trezarcoin/d' ~/.config/lxsession/LXDE-pi/autostart
+echo "@/usr/share/trezarpi/trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
 
 #sudo nano /etc/trezarpi.conf
 sudo reboot

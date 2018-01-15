@@ -14,9 +14,11 @@
 
 case "$1" in
   start)
+     /usr/share/trezarpi/lcd Initializing  
      /usr/share/trezarpi/trezard.py start
    ;;
   stop)
+    /usr/share/trezarpi/lcd Shutting down
    ;;
   force-reload|restart)
    ;;

@@ -39,7 +39,8 @@ def sendmail(message):
 def lcd(message):
   try:
     dev.i2c([31, 1], 0)
-    dev.i2c([33] + [ord(x) for x in message] + [0], 0)
+    for c in message:
+      dev.i2c([32, ord(c)],0)
   except Exception:
     print(traceback.format_exc())    
 
@@ -64,9 +65,9 @@ def main():
         print "Get balance"
         try:
           rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:17299"%(rpcuser, rpcpass))
-          #rpc_connection.getinfo()
-          balance = 0
-          lcd("Balance: $balance")
+          info = rpc_connection.getinfo()
+          lcd('Balance: ' + info['balance'])
+	  #'{:16.2f}'.format(info['balance'])
         except:
           pass
 

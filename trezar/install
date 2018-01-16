@@ -22,8 +22,12 @@ sudo update-rc.d trezard defaults
 echo " ##### Setting up autostart ##### "
 sed -i '/trezarcoin/d' ~/.config/lxsession/LXDE-pi/autostart
 echo "@/usr/share/trezarpi/trezarcoin" >> ~/.config/lxsession/LXDE-pi/autostart
-
+cp /etc/openbox.xml ~/.config/openbox/lxde-pi-rc.xml
 #sudo nano /etc/trezarpi.conf
+
+# TODO
+echo " ##### Initializing USB drive ##### "
+#cp /etc/trezard.conf /media/pi/USB
 
 echo " ##### Rebooting ##### "
 sudo reboot

@@ -1,20 +1,18 @@
 #!/usr/bin/env python
 import RPi.GPIO as GPIO
 import socket
-import sys
 import smtplib
 import ConfigParser
 import traceback
 import easyi2c
 from time import sleep
-from daemonize import Daemonize
 from bitcoinrpc.authproxy import AuthServiceProxy, JSONRPCException
 
 ledPin = 4
-pid = "/tmp/trezard.pid"
 
+config = r'/etc/trezard.conf'
 configParser = ConfigParser.ConfigParser()
-configParser.readfp(open(r'/etc/trezard.conf'))
+configParser.readfp(open(config))
 
 username = configParser.get('mail', 'username')
 password = configParser.get('mail', 'password')
@@ -24,8 +22,13 @@ rpcuser = configParser.get('rpc', 'username')
 rpcpass = configParser.get('rpc', 'password')
 
 dev = easyi2c.IIC(0x3c, 1)
+if dev:
+  dev.i2c([31, 0xc], 0)
 
 def sendmail(message):
+  if not username or not password or not address:
+    return
+
   try:
     server = smtplib.SMTP('smtp.gmail.com', 587)
     server.starttls()
@@ -36,16 +39,33 @@ def sendmail(message):
   except Exception:
     print(traceback.format_exc())
 
-def lcd(message):
+def lcd(title, message=''):
   try:
     dev.i2c([31, 1], 0)
-    for c in message:
-      dev.i2c([32, ord(c)],0)
+    sleep(0.01)
+    for t in title:
+      dev.i2c([32, ord(t), 0],0)
+    dev.i2c([31, 0xc0], 0)
+    for m in message:
+      dev.i2c([32, ord(m), 0],0)
   except Exception:
-    print(traceback.format_exc())    
+    print(traceback.format_exc())
+
+def lcdstatus(type):
+  try:
+    rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:17299"%(rpcuser, rpcpass), timeout=10)
+    info = rpc_connection.getinfo()
+    balance = '{:16.2f}'.format(info['balance'])
+  except socket.timeout:
+    pass #balance = '{:>16}'.format('Timeout')
+  except:
+    balance = '{:>16}'.format('N/A')
+    print(traceback.format_exc())
+  lcd('Balance:', balance)
 
 def main():
   try:
+    lcd('Daemon', 'Starting')
     GPIO.setmode(GPIO.BCM)
     GPIO.setwarnings(False)
     GPIO.setup(ledPin, GPIO.OUT)
@@ -57,32 +77,17 @@ def main():
       GPIO.output(ledPin, status)
       if prev_status and not status:
         sendmail('Crashed')
-        lcd('Wallet Crashed')
+        lcd('Wallet Status:', 'Crashed')
       if not prev_status and status:
         sendmail('Started')
-        lcd('Wallet Started')
-      if status:
-        print "Get balance"
-        try:
-          rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:17299"%(rpcuser, rpcpass))
-          info = rpc_connection.getinfo()
-          lcd('Balance: ' + info['balance'])
-	  #'{:16.2f}'.format(info['balance'])
-        except:
-          pass
-
+        lcd('Wallet Status:', 'Started')
+      if status and rpcuser and rpcpass:
+        lcdstatus(1)
       prev_status = status
-      sleep(1)
+      sleep(5)
   finally:
-    lcd('Shutting Down')
+    lcd('Daemon', 'Shutting Down')
     dev.close()
     GPIO.cleanup()
 
-if len(sys.argv) == 1:
-  main()
-elif sys.argv[1] == 'start':
-  daemon = Daemonize(app="trezard", pid=pid, action=main)
-  daemon.start()
-#elif sys.argv[1] == 'stop':
-#  daemon = Daemonize(app="trezard", pid=pid, action=main)
-#  daemon.exit()
+main()

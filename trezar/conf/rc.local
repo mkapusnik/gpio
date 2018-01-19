@@ -1,6 +1,16 @@
-/usr/share/trezarpi/lcd Booting ...
+#!/bin/bash
+export DISPLAY=:99
 Xvfb :99 -screen 0 1024x768x24+32 &
-DISPLAY=:99 x11vnc -bg -nopw
-#DISPLAY=:99 su - pi trezarcoin &
+x11vnc -loopbg -nopw &
+
+/usr/share/trezarpi/lcd Insert
+while [ $(find /media/pi -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 0 ]; do sleep 1; done
+dir=$(find /media/pi -mindepth 1 -maxdepth 1 -type d)
+/usr/share/trezarpi/lcd Mount
+while [ $(find $dir -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 0 ]; do sleep 1; done
+/usr/share/trezarpi/lcd Start
+
+su pi -c "trezarcoin-qt -datadir=$dir -conf=$dir/trezarcoin.conf"
+/usr/share/trezarpi/trezarpi $dir &
 
 exit 0

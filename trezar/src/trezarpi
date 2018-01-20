@@ -52,6 +52,7 @@ def lcd(title, message=''):
     print(traceback.format_exc())
 
 def lcdstatus(type):
+  balance = '{:>16}'.format('N/A')
   try:
     rpc_connection = AuthServiceProxy("http://%s:%s@127.0.0.1:17299"%(rpcuser, rpcpass), timeout=10)
     info = rpc_connection.getinfo()
@@ -59,7 +60,6 @@ def lcdstatus(type):
   except socket.timeout:
     pass #balance = '{:>16}'.format('Timeout')
   except:
-    balance = '{:>16}'.format('N/A')
     print(traceback.format_exc())
   lcd('Balance:', balance)
 

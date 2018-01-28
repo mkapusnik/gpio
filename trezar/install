@@ -24,6 +24,7 @@ echo " ##### Installing services into the OS ##### "
 sudo su -c '. raspi-config nonint && do_i2c 0'
 #sudo su -c '. raspi-config nonint && do_boot_behaviour B1 B1'
 #sudo update-rc.d -f lightdm remove
+echo 'trezarpi' | sudo tee /etc/hostname > /dev/null
 
 chmod +x /usr/bin/trezarcoin-qt
 sudo chown root:root /etc/rc.local

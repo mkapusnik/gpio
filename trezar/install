@@ -21,8 +21,9 @@ echo " ##### Extracting TrezarPi ##### "
 sudo tar -C / -xzf trezarpi.tar.gz
 
 echo " ##### Installing services into the OS ##### "
-. raspi-config nonint
-do_i2c 0
+sudo su -c '. raspi-config nonint && do_i2c 0'
+#sudo su -c '. raspi-config nonint && do_boot_behaviour B1 B1'
+#sudo update-rc.d -f lightdm remove
 
 chmod +x /usr/bin/trezarcoin-qt
 sudo chown root:root /etc/rc.local

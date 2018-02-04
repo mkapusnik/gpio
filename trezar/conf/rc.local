@@ -2,16 +2,6 @@
 export DISPLAY=:99
 Xvfb :99 -screen 0 1024x768x24+32 &
 su pi -c 'x11vnc -shared -forever -bg -nopw -display :99 -sleepin 1' &
-
-/usr/share/trezarpi/lcd Insert
-while [ $(find /media/pi -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 0 ]; do sleep 1; done
-dir=$(find /media/pi -mindepth 1 -maxdepth 1 -type d)
-/usr/share/trezarpi/lcd Mount
-while [ $(find $dir -mindepth 1 -maxdepth 1 -type d | wc -l) -eq 0 ]; do sleep 1; done
-/usr/share/trezarpi/lcd Start
-
-./trezard.py &
-
-su pi -c 'trezarcoin-qt -datadir=$dir -conf=$dir/trezarcoin.conf || /usr/share/trezarpi/lcd Wallet Not Started'
+su pi -c '/usr/share/trezarpi/bootstrap' &
 
 exit 0

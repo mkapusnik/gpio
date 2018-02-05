@@ -1,7 +1,0 @@
-#!/bin/bash
-export DISPLAY=:99
-Xvfb :99 -screen 0 1024x768x24+32 &
-su pi -c 'x11vnc -shared -forever -bg -nopw -display :99 -sleepin 1' &
-su pi -c '/usr/share/trezarpi/bootstrap' &
-
-exit 0

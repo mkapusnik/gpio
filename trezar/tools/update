@@ -1,8 +1,0 @@
-#!/bin/bash
-mkdir _dist
-mkdir -p _dist/usr/share/trezarpi
-cp -R src/. _dist/usr/share/trezarpi
-cd _dist
-tar -pczf ../update.tar.gz .
-cd ..
-rm -rf _dist

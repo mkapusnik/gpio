@@ -1,6 +1,7 @@
 #FROM balenalib/raspberry-pi-python
-FROM balenalib/raspberry-pi-alpine-python:latest
+#FROM balenalib/raspberry-pi-alpine-python:latest
 #FROM resin/%%RESIN_MACHINE_NAME%%-python
+FROM balenalib/rpi-raspbian
 
 ENV INITSYSTEM on
 

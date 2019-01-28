@@ -1,11 +1,13 @@
 #FROM balenalib/raspberry-pi-python
-FROM balenalib/raspberry-pi-alpine-python
+FROM balenalib/raspberry-pi-alpine-python:latest
 #FROM resin/%%RESIN_MACHINE_NAME%%-python
 
 ENV INITSYSTEM on
 
 COPY ./requirements.txt /requirements.txt
-RUN READTHEDOCS=True pip install -r /requirements.txt
+
+RUN pip install --upgrade pip
+RUN pip install -r /requirements.txt
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app

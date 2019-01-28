@@ -1,4 +1,4 @@
-FROM /%%BALENA_MACHINE_NAME%%-python
+FROM balenalib/%%BALENA_MACHINE_NAME%%-python:3-stretch-run
 ENV INITSYSTEM on
 
 COPY requirements.txt /requirements.txt

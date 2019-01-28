@@ -9,9 +9,9 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(7, GPIO.OUT)
 
 while True:
-	GPIO.output(7, 1)
+  GPIO.output(7, 1)
   time.sleep(1)
-	GPIO.output(7, 0)
+  GPIO.output(7, 0)
   time.sleep(1)	
 
 GPIO.cleanup()

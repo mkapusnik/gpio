@@ -7,7 +7,7 @@ ENV INITSYSTEM on
 
 COPY ./requirements.txt /requirements.txt
 
-RUN install_packages python-pip
+RUN install_packages python-pip python-setuptools
 #RUN pip install --upgrade pip
 RUN pip install -r /requirements.txt
 
